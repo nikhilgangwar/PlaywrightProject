@@ -13,6 +13,6 @@ const faker = require('faker');
   await page.fill('#userEmail', 'dxsjmgbfsd');
   // Single selection matching the value
  // await page.selectOption('select#colors', 'blue');
-  await page.waitForTimeout(10000)
+  await page.waitForTimeout(1000)
   await browser.close();
 })();
