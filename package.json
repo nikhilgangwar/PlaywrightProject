@@ -19,6 +19,6 @@
   "jest-junit": {
     "suiteNameTemplate": "PlaywrightProject",
     "outputDirectory": ".",
-    "outputName": "junit.xml"
+    "outputName": "TEST-junit.xml"
   }
 }
