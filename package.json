@@ -4,9 +4,9 @@
   "description": "This is a Sample Playwright project",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test sampleTest.js",
-    "test-html": "playwright test --browser=chromium --reporter=html",
-    "test:ci": "npm run test -- --watchAll=true --reporters=default --reporters=jest-junit"
+    "test": "npx playwright test sampleTest.spec.js",
+    "test-html": "npx playwright test --browser=chromium --reporter=html",
+    "test:ci": "npx playwright test --browser=chromium"
   },
   "author": "Nikhil Gangwar",
   "license": "ISC",
