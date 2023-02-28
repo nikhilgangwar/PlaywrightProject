@@ -1,44 +1,54 @@
 import { test, expect } from '@playwright/test';
 const { firefox } = require('playwright');
-const faker = require('faker');
+//const faker = require('faker');
+const { faker } = require('@faker-js/faker');
 
 
-test.only('First test playwright', async ({page}) => {
+test('Test with Random user', async ({page}) => {
 
   await page.goto('https://demoqa.com/automation-practice-form/');
-  //Test
-   await page.fill('#firstName', 'testzsdkjh');
-   await page.fill('#lastName', 'dfgdfgdfg');
-   await page.fill('#userEmail', 'dxsjmgbfsd');
-   // Single selection matching the value
-   
-  // await page.selectOption('select#colors', 'blue');
- //  await page.waitForTimeout(1000);
-   //await page.close();
+  const randomeFirstName = faker.name.firstName();
+  const randomeLastName = faker.name.lastName();
+  const randomeEmail = faker.internet.email();  
+  const randomeAddress = faker.address.streetAddress();
+  
+   await page.fill('#firstName', randomeFirstName);
+   await page.fill('#lastName', randomeLastName);
+   await page.fill('#userEmail', randomeEmail);
+   await page.getByText('Male', { exact: true }).click();
+   await page.getByText('Reading').click();
+   await page.getByText('Sports').click();
+   await page.fill('#currentAddress', randomeAddress);
+   await page.close();
 });
 
-
-
-test.skip('test', async ({page }) => {
-
+test.only('Test Customeer Deposit and Withdrwal', async ({ page }) => {
   await page.goto('https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login');
-  await page.getByRole('button', { name: 'Bank Manager Login' }).click();
-  await page.getByRole('button', { name: 'Add Customer' }).click();
+  await page.getByRole('button', { name: 'Customer Login' }).click();
+  await page.locator('#userSelect').selectOption('2');
+  await page.getByRole('button', { name: 'Login' }).click();
+  await page.getByRole('button', { name: 'Transactions' }).click();
+  await page.getByRole('button', { name: 'Back' }).click();
+
+  await page.getByRole('button', { name: 'Deposit' }).click();
+  //await page.getByPlaceholder('amount').click();
+  await page.getByPlaceholder('amount').fill('100');
+  await page.getByRole('form').getByRole('button', { name: 'Deposit' }).click();
+  await page.getByText('Deposit Successful').click(); 
+
+  //await page.waitForTimeout(1000);
+
+  await page.getByRole('button', { name: 'Withdrawl' }).click();
   
-  await page.getByPlaceholder('First Name').click();
-  await page.getByPlaceholder('First Name').fill('Testfname');
-  await page.getByPlaceholder('Last Name').click();
-  await page.getByPlaceholder('Last Name').fill('testlname');
-  await page.getByPlaceholder('Post Code').click();
-  await page.getByPlaceholder('Post Code').fill('2003');
-  await page.getByRole('button', { name: 'Open Account' }).click();
- // await page.locator('#userSelect').selectOption('6');
-  await page.locator('#currency').selectOption('Dollar');
-  await page.getByRole('button', { name: 'Customers' }).click();
-  await page.getByRole('cell', { name: 'Last Name' }).click();
-  await page.getByPlaceholder('Search Customer').click();
-  await page.getByPlaceholder('Search Customer').fill('testname');
-  await page.getByRole('cell', { name: 'Testname' }).click();
-  await page.getByRole('button', { name: 'Delete' }).click();
-  
+  await page.waitForTimeout(1000);
+  //await page.getByPlaceholder('amount').click();
+  await page.getByPlaceholder('amount').fill('100');
+  //await page.getByRole('button', { name: 'Withdraw', exact: true }).click();
+  await page.getByRole('form').getByRole('button', { name: 'Withdraw' }).click();
+  await page.getByText('Transaction successful').click();
+  await page.getByRole('button', { name: 'Transactions' }).click();
+
+  await page.getByRole('button', { name: 'Reset' }).click();
+  await page.getByRole('button', { name: 'Logout' }).click();
+
 });
